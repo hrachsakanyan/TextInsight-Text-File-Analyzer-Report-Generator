@@ -1,0 +1,3 @@
+# TextInsight runs on the Python standard library alone.
+# The only optional dependency is matplotlib, used by the --chart flag.
+matplotlib>=3.7 ; python_version >= "3.9"

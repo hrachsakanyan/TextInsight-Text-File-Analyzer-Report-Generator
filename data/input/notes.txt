@@ -1,0 +1,18 @@
+Project Notes: Building Small Tools
+
+Small tools are the best way to learn programming. A small tool has a clear
+input, a clear output, and nothing in between that you did not write yourself.
+
+Start with the data. Where does it come from? What shape is it in? A text file
+is a good first data source because it is simple, visible, and easy to inspect
+by hand when something goes wrong.
+
+Then write the smallest version that works. No configuration, no options, no
+error handling. Just read the file and print one number. Once that number is
+correct, add the next feature.
+
+Options come last. Every option is a promise to keep the code working in one
+more situation, so add options only when you actually need them.
+
+Finally, write the README. If the README is hard to write, the tool is probably
+harder to use than it should be.
