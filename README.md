@@ -1,99 +1,137 @@
-# TextInsight — Text File Analyzer & Report Generator
+# 🔎 TextInsight — Text File Analyzer & Report Generator
 
-A small command-line tool that reads `.txt` files, computes word / character /
-sentence statistics, finds the most frequent words (with stopwords removed),
-estimates reading time, and writes a formatted report file.
+> A small command-line tool that analyzes `.txt` files, calculates text statistics, finds the most frequent words, estimates reading time, and generates formatted reports.
 
-Built with the Python standard library only — `collections.Counter`, `re`,
-`csv`, `pathlib`, `argparse`. `matplotlib` is optional and used only by the
-`--chart` flag.
+Built entirely with the **Python standard library** using `collections.Counter`, `re`, `csv`, `pathlib`, and `argparse`.
+
+> 📊 `matplotlib` is optional and used only when the `--chart` flag is enabled.
 
 ---
 
-## Features
+## ✨ Features
 
-**Core**
+### 🧠 Core
 
-- Read a `.txt` file with automatic encoding fallback (UTF-8 / UTF-16 / CP1252 / Latin-1)
-- Regex tokenizer that keeps `don't` and `well-known` as single words
-- Word frequency table with stopwords filtered out
-- Text statistics: characters, words, unique words, sentences, paragraphs,
-  average word length, average sentence length, lexical diversity, longest word
-- Estimated reading time at a configurable words-per-minute rate
-- Formatted report exported to `data/output/`
+* 📄 Read a `.txt` file with automatic encoding fallback:
+  **UTF-8 / UTF-16 / CP1252 / Latin-1**
+* 🔤 Regex tokenizer that keeps `don't` and `well-known` as single words
+* 📈 Word frequency table with stopwords filtered out
+* 📊 Text statistics:
 
-**Extras**
+  * Characters
+  * Words
+  * Unique words
+  * Sentences
+  * Paragraphs
+  * Average word length
+  * Average sentence length
+  * Lexical diversity
+  * Longest word
+* ⏱️ Estimated reading time at a configurable words-per-minute rate
+* 📝 Formatted report exported to `data/output/`
 
-- Batch processing of a whole folder (`--recursive` for subfolders)
-- Combined `_summary.txt` table when more than one file is processed
-- CSV export of the frequency table (`--csv`)
-- Top-N bar chart as PNG (`--chart`, needs matplotlib)
-- Stopword list loaded from an external file (`--stopwords`)
-- Minimum word length filter, or stopword filtering turned off entirely
+### 🚀 Extras
+
+* 📁 Batch processing of a whole folder (`--recursive` for subfolders)
+* 📋 Combined `_summary.txt` table when more than one file is processed
+* 📑 CSV export of the frequency table (`--csv`)
+* 📊 Top-N bar chart as PNG (`--chart`, requires `matplotlib`)
+* 🛑 Stopword list loaded from an external file (`--stopwords`)
+* 🔢 Minimum word length filter
+* ⚙️ Option to turn stopword filtering off entirely
 
 ---
 
-## Installation
+## 🛠️ Installation
 
 ```bash
 git clone https://github.com/<your-username>/textinsight.git
 cd textinsight
 
-# Optional -- only needed for --chart
+# Optional — only needed for --chart
 pip install -r requirements.txt
 ```
 
-Requires Python 3.9 or newer. No dependencies for the core features.
+### Requirements
+
+* 🐍 Python **3.9+**
+* 📦 No dependencies required for core features
+* 📊 `matplotlib` is optional and only needed for `--chart`
 
 ---
 
-## Usage
+## ▶️ Usage
+
+### Analyze a single file
 
 ```bash
-# Analyze a single file
 python src/main.py data/input/sample.txt
+```
 
-# Top 20 words, plus a CSV export
+### Analyze with Top 20 words and CSV export
+
+```bash
 python src/main.py data/input/sample.txt --top 20 --csv
+```
 
-# Process every .txt in a folder, quietly, and write a summary
+### Process every `.txt` file in a folder
+
+```bash
 python src/main.py data/input --recursive --quiet
+```
 
-# Use your own stopword list and a slower reading speed
+### Use a custom stopword list and slower reading speed
+
+```bash
 python src/main.py data/input/sample.txt --stopwords data/stopwords.txt --wpm 150
+```
 
-# Ignore short words and skip stopword filtering
+### Ignore short words and disable stopword filtering
+
+```bash
 python src/main.py data/input/sample.txt --no-stopwords --min-length 5
+```
 
-# Save a PNG bar chart of the top words
+### Generate a PNG chart of the top words
+
+```bash
 python src/main.py data/input/sample.txt --chart
 ```
 
-### Options
+---
 
-| Flag | Description | Default |
-| --- | --- | --- |
-| `path` | A `.txt` file, or a folder for batch mode | *(required)* |
-| `-o, --output-dir` | Where reports are written | `data/output` |
-| `-n, --top N` | How many top words to include | `10` |
-| `-s, --stopwords FILE` | Stopword list, one word per line | built-in list |
-| `--no-stopwords` | Disable stopword filtering | off |
-| `--min-length N` | Ignore words shorter than N characters | `1` |
-| `--wpm N` | Reading speed for the time estimate | `200` |
-| `--pattern` | Glob pattern used in folder mode | `*.txt` |
-| `-r, --recursive` | In folder mode, also search subfolders | off |
-| `--csv` | Also export the frequency table as CSV | off |
-| `--chart` | Also save a top-words PNG (needs matplotlib) | off |
-| `-q, --quiet` | Do not print reports to the console | off |
+## ⚙️ Command-Line Options
 
-Exit codes: `0` success, `1` nothing could be analyzed or some files were
-skipped, `2` invalid arguments.
+| Flag                   | Description                                    |    Default    |
+| :--------------------- | :--------------------------------------------- | :-----------: |
+| `path`                 | A `.txt` file, or a folder for batch mode      |  **Required** |
+| `-o, --output-dir`     | Where reports are written                      | `data/output` |
+| `-n, --top N`          | How many top words to include                  |      `10`     |
+| `-s, --stopwords FILE` | Stopword list, one word per line               | Built-in list |
+| `--no-stopwords`       | Disable stopword filtering                     |      Off      |
+| `--min-length N`       | Ignore words shorter than N characters         |      `1`      |
+| `--wpm N`              | Reading speed for the time estimate            |     `200`     |
+| `--pattern`            | Glob pattern used in folder mode               |    `*.txt`    |
+| `-r, --recursive`      | In folder mode, also search subfolders         |      Off      |
+| `--csv`                | Also export the frequency table as CSV         |      Off      |
+| `--chart`              | Also save a top-words PNG (needs `matplotlib`) |      Off      |
+| `-q, --quiet`          | Do not print reports to the console            |      Off      |
+
+### Exit Codes
+
+| Code | Meaning                                                 |
+| :--: | :------------------------------------------------------ |
+|  `0` | ✅ Success                                               |
+|  `1` | ⚠️ Nothing could be analyzed or some files were skipped |
+|  `2` | ❌ Invalid arguments                                     |
 
 ---
 
-## Input / Output example
+## 📥 Input / 📤 Output Example
 
-**Input** — `data/input/sample.txt`
+### 📄 Input
+
+`data/input/sample.txt`
 
 ```text
 The Value of Reading
@@ -105,13 +143,15 @@ full of faster media.
 ...
 ```
 
-**Command**
+### 💻 Command
 
 ```bash
 python src/main.py data/input/sample.txt --top 8 --csv
 ```
 
-**Output** — `data/output/sample_report.txt`
+### 📋 Output
+
+`data/output/sample_report.txt`
 
 ```text
 ============================================================
@@ -153,7 +193,9 @@ Generated by TextInsight
 ============================================================
 ```
 
-**Output** — `data/output/sample_frequencies.csv`
+### 📑 CSV Export
+
+`data/output/sample_frequencies.csv`
 
 ```csv
 rank,word,count,percent_of_content_words
@@ -162,7 +204,9 @@ rank,word,count,percent_of_content_words
 3,writing,3,2.42
 ```
 
-**Batch mode** — `data/output/_summary.txt`
+### 📁 Batch Mode
+
+`data/output/_summary.txt`
 
 ```text
 ==============================================================================
@@ -179,19 +223,22 @@ TOTAL (2 files)                     363         35          1 min 49 sec
 
 ---
 
-## Project structure
+## 🗂️ Project Structure
 
 ```text
 textinsight/
 ├── src/
 │   ├── main.py          # CLI: argument parsing, batch loop, output files
 │   └── analyzer.py      # Core logic: tokenizing, stats, report rendering
+│
 ├── data/
 │   ├── input/           # Sample .txt files
 │   │   ├── sample.txt
 │   │   └── notes.txt
+│   │
 │   ├── output/          # Generated reports (gitignored)
 │   └── stopwords.txt    # Editable stopword list
+│
 ├── README.md
 ├── requirements.txt
 └── .gitignore
@@ -199,43 +246,86 @@ textinsight/
 
 ---
 
-## How it works
+## 🔍 How It Works
 
-1. **Read** — `read_text()` tries several encodings so a file saved from
-   Notepad or Word still opens.
-2. **Tokenize** — a regex picks out letter runs, allowing internal apostrophes
-   and hyphens, then lowercases them. Digits and punctuation are dropped.
-3. **Count** — `collections.Counter` builds the frequency table over the tokens
-   left after stopword and minimum-length filtering. Ties are broken
-   alphabetically so results are reproducible.
-4. **Measure** — sentences are found by splitting on `.`, `!`, `?` (and the
-   Armenian `։`, `՞`, `՜`); paragraphs by splitting on blank lines.
-5. **Report** — statistics and a bar-chart-style frequency table are rendered
-   as aligned plain text and written to `data/output/`.
+### 1. 📖 Read
+
+`read_text()` tries several encodings so a file saved from Notepad or Word can still be opened.
+
+**Supported fallback order:**
+
+`UTF-8 → UTF-16 → CP1252 → Latin-1`
 
 ---
 
-## What I learned
+### 2. 🔤 Tokenize
 
-- Reading and writing files safely with `pathlib`, including encoding fallbacks
-- Aggregating data with dictionaries and `collections.Counter`
-- Sorting with composite keys to get stable, tie-broken ordering
-- Splitting a program into a reusable logic module and a thin CLI layer
-- Building a real command-line interface with `argparse` and meaningful exit codes
-- Formatting aligned text output with f-string padding
+A regex picks out letter runs while allowing internal apostrophes and hyphens.
 
----
+Examples:
 
-## Possible next steps
+```text
+don't
+well-known
+```
 
-- Sentiment scoring with a simple word-list approach
-- N-gram (bigram / trigram) frequency
-- Readability scores such as Flesch–Kincaid
-- HTML or Markdown report output
-- Unit tests with `pytest`
+Tokens are then converted to lowercase.
+
+Digits and punctuation are dropped.
 
 ---
 
-## License
+### 3. 🔢 Count
+
+`collections.Counter` builds the frequency table over tokens remaining after:
+
+* Stopword filtering
+* Minimum-length filtering
+
+Ties are broken alphabetically so results remain reproducible.
+
+---
+
+### 4. 📏 Measure
+
+Text statistics are calculated by analyzing:
+
+* **Sentences** — split on `.`, `!`, `?` and Armenian `։`, `՞`, `՜`
+* **Paragraphs** — split on blank lines
+
+---
+
+### 5. 📝 Report
+
+Statistics and a bar-chart-style frequency table are rendered as aligned plain text and written to:
+
+```text
+data/output/
+```
+
+---
+
+## 🎓 What I Learned
+
+* 📂 Reading and writing files safely with `pathlib`, including encoding fallbacks
+* 📊 Aggregating data with dictionaries and `collections.Counter`
+* 🔢 Sorting with composite keys to get stable, tie-broken ordering
+* 🧩 Splitting a program into a reusable logic module and a thin CLI layer
+* 🖥️ Building a real command-line interface with `argparse` and meaningful exit codes
+* ✨ Formatting aligned text output with f-string padding
+
+---
+
+## 🚀 Possible Next Steps
+
+* ❤️ Sentiment scoring with a simple word-list approach
+* 🔗 N-gram (bigram / trigram) frequency
+* 📖 Readability scores such as Flesch–Kincaid
+* 🌐 HTML or Markdown report output
+* 🧪 Unit tests with `pytest`
+
+---
+
+## 📄 License
 
 MIT
