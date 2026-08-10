@@ -12,7 +12,7 @@ Built entirely with the **Python standard library** using `collections.Counter`,
 
 ### 🧠 Core
 
-* 📄 Read a `.txt` file with automatic encoding fallback:
+* 📄 Read a `.txt` file with automatic encoding fallback: 
   **UTF-8 / UTF-16 / CP1252 / Latin-1**
 * 🔤 Regex tokenizer that keeps `don't` and `well-known` as single words
 * 📈 Word frequency table with stopwords filtered out
