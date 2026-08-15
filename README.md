@@ -129,7 +129,7 @@ python src/main.py data/input/sample.txt --chart
 
 ## 📥 Input / 📤 Output Example
 
-### 📄 Input
+### 📄 Input 
 
 `data/input/sample.txt`
 
