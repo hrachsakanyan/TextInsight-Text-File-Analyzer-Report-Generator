@@ -10,7 +10,7 @@ Built entirely with the **Python standard library** using `collections.Counter`,
 
 ## ✨ Features
 
-### 🧠 Core
+### 🧠 Core 
 
 * 📄 Read a `.txt` file with automatic encoding fallback: 
   **UTF-8 / UTF-16 / CP1252 / Latin-1**
