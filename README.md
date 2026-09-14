@@ -8,7 +8,7 @@ Built entirely with the **Python standard library** using `collections.Counter`,
 
 ---
 
-## ✨ Features
+## ✨ Features 
 
 ### 🧠 Core
 
