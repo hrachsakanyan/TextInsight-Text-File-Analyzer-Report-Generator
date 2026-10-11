@@ -1,4 +1,4 @@
-# 🔎 TextInsight — Text File Analyzer & Report Generator 
+# 🔎 TextInsight — Text File Analyzer & Report Generator
 
 > A small command-line tool that analyzes `.txt` files, calculates text statistics, finds the most frequent words, estimates reading time, and generates formatted reports.
 
